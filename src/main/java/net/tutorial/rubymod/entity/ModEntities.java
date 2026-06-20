@@ -20,6 +20,7 @@ public class ModEntities {
             ENTITY_TYPES.register("ruby_golem",
                     () -> EntityType.Builder.of(RubyGolemEntity::new, MobCategory.MONSTER)
                             .sized(0.6f, 1.95f) // 人形怪的碰撞箱
+                            .fireImmune()       // 不怕火和岩浆
                             .build("ruby_golem"));
 
     public static final RegistryObject<EntityType<RubyCreeperEntity>> RUBY_CREEPER =
@@ -32,6 +33,7 @@ public class ModEntities {
             ENTITY_TYPES.register("ruby_skeleton",
                     () -> EntityType.Builder.of(RubySkeletonEntity::new, MobCategory.MONSTER)
                             .sized(0.6f, 1.99f) // 和原版骷髅一样大
+                            .fireImmune()       // 不怕火和岩浆
                             .build("ruby_skeleton"));
 
     public static final RegistryObject<EntityType<AdamantineRubyGolemEntity>> ADAMANTINE_RUBY_GOLEM =

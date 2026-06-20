@@ -42,6 +42,12 @@ public class RubySkeletonEntity extends Skeleton {
                 .add(Attributes.ATTACK_DAMAGE, 4.0D);
     }
 
+    // 红宝石骷髅不怕太阳，白天露天也不会自燃
+    @Override
+    public boolean isSunBurnTick() {
+        return false;
+    }
+
     // 用我们自己的目标替换原版（原版字段私有取不到）
     @Override
     public void reassessWeaponGoal() {
@@ -82,9 +88,9 @@ public class RubySkeletonEntity extends Skeleton {
         this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
 
         RandomSource random = this.getRandom();
-        // 不给头盔（戴头盔会挡住阳光导致不燃烧），白天露天可稳定着火
-        EquipmentSlot[] slots = { EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET };
+        EquipmentSlot[] slots = { EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET };
         Item[][] armor = {
+                { ModItems.RUBY_HELMET.get(), Items.IRON_HELMET },
                 { ModItems.RUBY_CHESTPLATE.get(), Items.IRON_CHESTPLATE },
                 { ModItems.RUBY_LEGGINGS.get(), Items.IRON_LEGGINGS },
                 { ModItems.RUBY_BOOTS.get(), Items.IRON_BOOTS },

@@ -200,19 +200,29 @@ public class AdamantineRubyGolemEntity extends Monster {
         this.bossEvent.setName(this.getDisplayName());
     }
 
-    // ===== 音效（用铁傀儡的声音，更厚重）=====
+    // ===== 音效：用劫掠兽的吼叫 + 凋灵死亡音，和普通红宝石傀儡(僵尸音)完全不同 =====
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.RAVAGER_AMBIENT;
+    }
+
+    @Override
+    public float getVoicePitch() {
+        return 0.6F; // 压低音调，更厚重
+    }
+
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.IRON_GOLEM_HURT;
+        return SoundEvents.RAVAGER_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.IRON_GOLEM_DEATH;
+        return SoundEvents.WITHER_DEATH; // 史诗级 BOSS 死亡音
     }
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.IRON_GOLEM_STEP, 1.0F, 0.7F);
+        this.playSound(SoundEvents.RAVAGER_STEP, 1.0F, 0.7F);
     }
 }
