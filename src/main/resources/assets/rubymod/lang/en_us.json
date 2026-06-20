@@ -16,5 +16,7 @@
     "item.rubymod.ruby_creeper_spawn_egg": "Ruby Creeper Spawn Egg",
     "entity.rubymod.ruby_creeper": "Ruby Creeper",
     "item.rubymod.ruby_skeleton_spawn_egg": "Ruby Skeleton Spawn Egg",
-    "entity.rubymod.ruby_skeleton": "Ruby Skeleton"
+    "entity.rubymod.ruby_skeleton": "Ruby Skeleton",
+    "item.rubymod.adamantine_ruby_golem_spawn_egg": "Adamantine Ruby Golem Spawn Egg",
+    "entity.rubymod.adamantine_ruby_golem": "Adamantine Ruby Golem"
 }

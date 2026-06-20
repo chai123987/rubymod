@@ -59,6 +59,11 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntities.RUBY_SKELETON, 0xD8D8D8, 0x9B1B1B,
                     new Item.Properties()));
 
+    // 艾德曼红宝石傀儡（BOSS）刷怪蛋
+    public static final RegistryObject<Item> ADAMANTINE_RUBY_GOLEM_SPAWN_EGG = ITEMS.register("adamantine_ruby_golem_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.ADAMANTINE_RUBY_GOLEM, 0x8B0000, 0xFFD700,
+                    new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
