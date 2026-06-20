@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.tutorial.rubymod.RubyMod;
 import net.tutorial.rubymod.entity.custom.RubyGolemEntity;
 
-// 用通用人形模型(从僵尸模型骨架烘焙)，自带走路/攻击挥手动画
 public class RubyGolemRenderer extends HumanoidMobRenderer<RubyGolemEntity, HumanoidModel<RubyGolemEntity>> {
 
     public RubyGolemRenderer(EntityRendererProvider.Context context) {
