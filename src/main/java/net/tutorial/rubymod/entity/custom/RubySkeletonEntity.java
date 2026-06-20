@@ -82,9 +82,9 @@ public class RubySkeletonEntity extends Skeleton {
         this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
 
         RandomSource random = this.getRandom();
-        EquipmentSlot[] slots = { EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET };
+        // 不给头盔（戴头盔会挡住阳光导致不燃烧），白天露天可稳定着火
+        EquipmentSlot[] slots = { EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET };
         Item[][] armor = {
-                { ModItems.RUBY_HELMET.get(), Items.IRON_HELMET },
                 { ModItems.RUBY_CHESTPLATE.get(), Items.IRON_CHESTPLATE },
                 { ModItems.RUBY_LEGGINGS.get(), Items.IRON_LEGGINGS },
                 { ModItems.RUBY_BOOTS.get(), Items.IRON_BOOTS },
