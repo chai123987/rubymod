@@ -64,6 +64,16 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntities.ADAMANTINE_RUBY_GOLEM, 0x8B0000, 0xFFD700,
                     new Item.Properties()));
 
+    // 红宝石蜘蛛刷怪蛋
+    public static final RegistryObject<Item> RUBY_SPIDER_SPAWN_EGG = ITEMS.register("ruby_spider_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.RUBY_SPIDER, 0x6E0B0B, 0x2B0000,
+                    new Item.Properties()));
+
+    // 红宝石唤魔者刷怪蛋
+    public static final RegistryObject<Item> RUBY_EVOKER_SPAWN_EGG = ITEMS.register("ruby_evoker_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.RUBY_EVOKER, 0xC86464, 0x7A1414,
+                    new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

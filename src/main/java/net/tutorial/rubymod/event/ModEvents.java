@@ -13,6 +13,8 @@ import net.tutorial.rubymod.entity.custom.RubyCreeperEntity;
 import net.tutorial.rubymod.entity.custom.RubySkeletonEntity;
 import net.tutorial.rubymod.entity.custom.RubyGolemEntity;
 import net.tutorial.rubymod.entity.custom.AdamantineRubyGolemEntity;
+import net.tutorial.rubymod.entity.custom.RubySpiderEntity;
+import net.tutorial.rubymod.entity.custom.RubyEvokerEntity;
 
 @Mod.EventBusSubscriber(modid = RubyMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEvents {
@@ -23,6 +25,8 @@ public class ModEvents {
         event.put(ModEntities.RUBY_CREEPER.get(), RubyCreeperEntity.createAttributes().build());
         event.put(ModEntities.RUBY_SKELETON.get(), RubySkeletonEntity.createAttributes().build());
         event.put(ModEntities.ADAMANTINE_RUBY_GOLEM.get(), AdamantineRubyGolemEntity.createAttributes().build());
+        event.put(ModEntities.RUBY_SPIDER.get(), RubySpiderEntity.createAttributes().build());
+        event.put(ModEntities.RUBY_EVOKER.get(), RubyEvokerEntity.createAttributes().build());
     }
 
     @SubscribeEvent
@@ -41,6 +45,12 @@ public class ModEvents {
                 SpawnPlacementRegisterEvent.Operation.AND);
 
         event.register(ModEntities.RUBY_SKELETON.get(),
+                SpawnPlacements.Type.ON_GROUND,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules,
+                SpawnPlacementRegisterEvent.Operation.AND);
+
+        event.register(ModEntities.RUBY_SPIDER.get(),
                 SpawnPlacements.Type.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules,

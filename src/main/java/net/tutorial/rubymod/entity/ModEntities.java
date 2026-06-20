@@ -11,6 +11,8 @@ import net.tutorial.rubymod.entity.custom.RubyCreeperEntity;
 import net.tutorial.rubymod.entity.custom.RubySkeletonEntity;
 import net.tutorial.rubymod.entity.custom.RubyGolemEntity;
 import net.tutorial.rubymod.entity.custom.AdamantineRubyGolemEntity;
+import net.tutorial.rubymod.entity.custom.RubySpiderEntity;
+import net.tutorial.rubymod.entity.custom.RubyEvokerEntity;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
@@ -42,6 +44,18 @@ public class ModEntities {
                             .sized(1.4f, 3.0f) // BOSS 体型，和铁傀儡差不多大
                             .fireImmune()       // 不怕火和岩浆
                             .build("adamantine_ruby_golem"));
+
+    public static final RegistryObject<EntityType<RubySpiderEntity>> RUBY_SPIDER =
+            ENTITY_TYPES.register("ruby_spider",
+                    () -> EntityType.Builder.of(RubySpiderEntity::new, MobCategory.MONSTER)
+                            .sized(1.4f, 0.9f) // 和原版蜘蛛一样大
+                            .build("ruby_spider"));
+
+    public static final RegistryObject<EntityType<RubyEvokerEntity>> RUBY_EVOKER =
+            ENTITY_TYPES.register("ruby_evoker",
+                    () -> EntityType.Builder.of(RubyEvokerEntity::new, MobCategory.MONSTER)
+                            .sized(0.6f, 1.95f) // 和原版唤魔者一样大
+                            .build("ruby_evoker"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
