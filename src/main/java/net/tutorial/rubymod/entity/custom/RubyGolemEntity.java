@@ -1,10 +1,21 @@
 package net.tutorial.rubymod.entity.custom;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.tutorial.rubymod.item.ModItems;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -70,5 +81,38 @@ public class RubyGolemEntity extends Monster {
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(SoundEvents.ZOMBIE_STEP, 0.15F, 0.6F);
+    }
+
+    // ===== 生成时低概率携带武器 / 防具 =====
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty,
+                                        MobSpawnType reason, SpawnGroupData data, CompoundTag tag) {
+        SpawnGroupData result = super.finalizeSpawn(level, difficulty, reason, data, tag);
+        RandomSource random = this.getRandom();
+
+        // 约 15% 概率手持一把武器
+        if (random.nextFloat() < 0.15F) {
+            Item[] weapons = { ModItems.RUBY_SWORD.get(), ModItems.RUBY_AXE.get(), Items.IRON_SWORD };
+            this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(weapons[random.nextInt(weapons.length)]));
+            this.setDropChance(EquipmentSlot.MAINHAND, 0.05F);
+        }
+
+        // 每个防具部位独立约 12% 概率（红宝石或铁）
+        EquipmentSlot[] slots = { EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET };
+        Item[][] armor = {
+                { ModItems.RUBY_HELMET.get(), Items.IRON_HELMET },
+                { ModItems.RUBY_CHESTPLATE.get(), Items.IRON_CHESTPLATE },
+                { ModItems.RUBY_LEGGINGS.get(), Items.IRON_LEGGINGS },
+                { ModItems.RUBY_BOOTS.get(), Items.IRON_BOOTS },
+        };
+        for (int i = 0; i < slots.length; i++) {
+            if (random.nextFloat() < 0.12F) {
+                Item[] choices = armor[i];
+                this.setItemSlot(slots[i], new ItemStack(choices[random.nextInt(choices.length)]));
+                this.setDropChance(slots[i], 0.05F);
+            }
+        }
+
+        return result;
     }
 }
