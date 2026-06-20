@@ -14,5 +14,7 @@
     "entity.rubymod.ruby_golem": "红宝石傀儡",
     "creativetab.rubymod.ruby_tab": "红宝石模组",
     "item.rubymod.ruby_creeper_spawn_egg": "红宝石苦力怕刷怪蛋",
-    "entity.rubymod.ruby_creeper": "红宝石苦力怕"
+    "entity.rubymod.ruby_creeper": "红宝石苦力怕",
+    "item.rubymod.ruby_skeleton_spawn_egg": "红宝石骷髅刷怪蛋",
+    "entity.rubymod.ruby_skeleton": "红宝石骷髅"
 }

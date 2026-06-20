@@ -14,5 +14,7 @@
     "entity.rubymod.ruby_golem": "Ruby Golem",
     "creativetab.rubymod.ruby_tab": "Ruby Mod",
     "item.rubymod.ruby_creeper_spawn_egg": "Ruby Creeper Spawn Egg",
-    "entity.rubymod.ruby_creeper": "Ruby Creeper"
+    "entity.rubymod.ruby_creeper": "Ruby Creeper",
+    "item.rubymod.ruby_skeleton_spawn_egg": "Ruby Skeleton Spawn Egg",
+    "entity.rubymod.ruby_skeleton": "Ruby Skeleton"
 }

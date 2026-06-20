@@ -8,6 +8,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.tutorial.rubymod.RubyMod;
 import net.tutorial.rubymod.entity.custom.RubyCreeperEntity;
+import net.tutorial.rubymod.entity.custom.RubySkeletonEntity;
 import net.tutorial.rubymod.entity.custom.RubyGolemEntity;
 
 public class ModEntities {
@@ -25,6 +26,12 @@ public class ModEntities {
                     () -> EntityType.Builder.of(RubyCreeperEntity::new, MobCategory.MONSTER)
                             .sized(0.6f, 1.7f) // 和原版苦力怕一样大
                             .build("ruby_creeper"));
+
+    public static final RegistryObject<EntityType<RubySkeletonEntity>> RUBY_SKELETON =
+            ENTITY_TYPES.register("ruby_skeleton",
+                    () -> EntityType.Builder.of(RubySkeletonEntity::new, MobCategory.MONSTER)
+                            .sized(0.6f, 1.99f) // 和原版骷髅一样大
+                            .build("ruby_skeleton"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

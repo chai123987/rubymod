@@ -54,6 +54,11 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntities.RUBY_CREEPER, 0xC42A2A, 0x5A0A0A,
                     new Item.Properties()));
 
+    // 红宝石骷髅刷怪蛋
+    public static final RegistryObject<Item> RUBY_SKELETON_SPAWN_EGG = ITEMS.register("ruby_skeleton_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.RUBY_SKELETON, 0xD8D8D8, 0x9B1B1B,
+                    new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

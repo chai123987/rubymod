@@ -8,6 +8,7 @@ import net.tutorial.rubymod.RubyMod;
 import net.tutorial.rubymod.entity.ModEntities;
 import net.tutorial.rubymod.entity.client.ModModelLayers;
 import net.tutorial.rubymod.entity.client.RubyCreeperRenderer;
+import net.tutorial.rubymod.entity.client.RubySkeletonRenderer;
 import net.tutorial.rubymod.entity.client.RubyGolemModel;
 import net.tutorial.rubymod.entity.client.RubyGolemRenderer;
 
@@ -24,5 +25,6 @@ public class ModClientEvents {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.RUBY_GOLEM.get(), RubyGolemRenderer::new);
         event.registerEntityRenderer(ModEntities.RUBY_CREEPER.get(), RubyCreeperRenderer::new);
+        event.registerEntityRenderer(ModEntities.RUBY_SKELETON.get(), RubySkeletonRenderer::new);
     }
 }
