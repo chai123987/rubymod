@@ -15,8 +15,8 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<RubyGolemEntity>> RUBY_GOLEM =
             ENTITY_TYPES.register("ruby_golem",
-                    () -> EntityType.Builder.of(RubyGolemEntity::new, MobCategory.CREATURE)
-                            .sized(0.9f, 0.9f) // 碰撞箱 宽 x 高
+                    () -> EntityType.Builder.of(RubyGolemEntity::new, MobCategory.MONSTER)
+                            .sized(0.6f, 1.95f) // 人形怪的碰撞箱
                             .build("ruby_golem"));
 
     public static void register(IEventBus eventBus) {

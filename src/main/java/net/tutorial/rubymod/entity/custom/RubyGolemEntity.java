@@ -1,64 +1,74 @@
 package net.tutorial.rubymod.entity.custom;
 
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.FollowParentGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.tutorial.rubymod.entity.ModEntities;
-import net.tutorial.rubymod.item.ModItems;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.level.block.state.BlockState;
 
-public class RubyGolemEntity extends Animal {
+public class RubyGolemEntity extends Monster {
 
-    public RubyGolemEntity(EntityType<? extends Animal> entityType, Level level) {
+    public RubyGolemEntity(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
     }
 
-    // 实体的属性：血量、移动速度等
     public static AttributeSupplier.Builder createAttributes() {
-        return Animal.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 20.0D)
+        return Monster.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.25D)
-                .add(Attributes.FOLLOW_RANGE, 16.0D);
+                .add(Attributes.ATTACK_DAMAGE, 5.0D)
+                .add(Attributes.FOLLOW_RANGE, 24.0D)
+                .add(Attributes.ARMOR, 2.0D);
     }
 
-    // 行为（AI Goal）。数字越小优先级越高。
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new FloatGoal(this)); // 会游泳，不会淹死
-        this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D)); // 受伤逃跑
-        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D)); // 繁殖
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.of(ModItems.RUBY.get()), false)); // 被红宝石吸引
-        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D)); // 幼崽跟随父母
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D)); // 随机走动
-        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F)); // 看玩家
-        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this)); // 随机张望
+        this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0D, false)); // 走过去攻击
+        this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
-    // 用红宝石可以喂养/繁殖
+    // ===== 低沉音效：用僵尸的声音，但把音调压低 =====
     @Override
-    public boolean isFood(ItemStack stack) {
-        return stack.is(ModItems.RUBY.get());
+    public float getVoicePitch() {
+        return 0.4F; // 越小越低沉
     }
 
-    // 繁殖后代
-    @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
-        return ModEntities.RUBY_GOLEM.get().create(level);
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ZOMBIE_AMBIENT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.ZOMBIE_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ZOMBIE_DEATH;
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, BlockState state) {
+        this.playSound(SoundEvents.ZOMBIE_STEP, 0.15F, 0.6F);
     }
 }

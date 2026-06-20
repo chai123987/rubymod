@@ -1,7 +1,7 @@
 package net.tutorial.rubymod.event;
 
 import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -21,10 +21,11 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void registerSpawnPlacements(SpawnPlacementRegisterEvent event) {
+        // 怪物生成规则：在黑暗的地表生成
         event.register(ModEntities.RUBY_GOLEM.get(),
                 SpawnPlacements.Type.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                Animal::checkAnimalSpawnRules,
+                Monster::checkMonsterSpawnRules,
                 SpawnPlacementRegisterEvent.Operation.AND);
     }
 }
