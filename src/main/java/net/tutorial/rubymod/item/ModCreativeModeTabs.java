@@ -21,11 +21,10 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.rubymod.ruby_tab"))
                     .withTabsBefore(CreativeModeTabs.COMBAT)
                     .displayItems((parameters, output) -> {
-                        // 物品
                         output.accept(ModItems.RUBY.get());
                         output.accept(ModItems.RUBY_SWORD.get());
+                        output.accept(ModItems.RUBY_PICKAXE.get());
                         output.accept(ModItems.RUBY_GOLEM_SPAWN_EGG.get());
-                        // 方块
                         output.accept(ModBlocks.RUBY_BLOCK.get());
                         output.accept(ModBlocks.RUBY_ORE.get());
                         output.accept(ModBlocks.DEEPSLATE_RUBY_ORE.get());
