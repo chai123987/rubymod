@@ -1,44 +1,88 @@
 package net.tutorial.rubymod.item;
 
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.tutorial.rubymod.RubyMod;
-import net.tutorial.rubymod.block.ModBlocks;
 
-public class ModCreativeModeTabs {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, RubyMod.MOD_ID);
+import java.util.function.Supplier;
 
-    public static final RegistryObject<CreativeModeTab> RUBY_TAB = CREATIVE_MODE_TABS.register("ruby_tab",
-            () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(ModItems.RUBY.get()))
-                    .title(Component.translatable("creativetab.rubymod.ruby_tab"))
-                    .withTabsBefore(CreativeModeTabs.COMBAT)
-                    .displayItems((parameters, output) -> {
-                        output.accept(ModItems.RUBY.get());
-                        output.accept(ModItems.RUBY_SWORD.get());
-                        output.accept(ModItems.RUBY_PICKAXE.get());
-                        output.accept(ModItems.RUBY_AXE.get());
-                        output.accept(ModItems.RUBY_HELMET.get());
-                        output.accept(ModItems.RUBY_CHESTPLATE.get());
-                        output.accept(ModItems.RUBY_LEGGINGS.get());
-                        output.accept(ModItems.RUBY_BOOTS.get());
-                        output.accept(ModItems.RUBY_GOLEM_SPAWN_EGG.get());
-                        output.accept(ModItems.RUBY_CREEPER_SPAWN_EGG.get());
-                        output.accept(ModItems.RUBY_SKELETON_SPAWN_EGG.get());
-                        output.accept(ModBlocks.RUBY_BLOCK.get());
-                        output.accept(ModBlocks.RUBY_ORE.get());
-                        output.accept(ModBlocks.DEEPSLATE_RUBY_ORE.get());
-                    })
-                    .build());
+// 自定义盔甲材质：红宝石（比钻石稍强一点）
+public enum ModArmorMaterials implements ArmorMaterial {
+    // 名字, 耐久倍率, 附魔能力, 装备音效, 韧性, 击退抗性, 修复材料
+    RUBY("ruby", 40, 18, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.5F, 0.05F,
+            () -> Ingredient.of(ModItems.RUBY.get()));
 
-    public static void register(IEventBus eventBus) {
-        CREATIVE_MODE_TABS.register(eventBus);
+    private final String name;
+    private final int durabilityMultiplier;
+    private final int enchantmentValue;
+    private final SoundEvent equipSound;
+    private final float toughness;
+    private final float knockbackResistance;
+    private final Supplier<Ingredient> repairIngredient;
+
+    ModArmorMaterials(String name, int durabilityMultiplier, int enchantmentValue,
+                      SoundEvent equipSound, float toughness, float knockbackResistance,
+                      Supplier<Ingredient> repairIngredient) {
+        this.name = name;
+        this.durabilityMultiplier = durabilityMultiplier;
+        this.enchantmentValue = enchantmentValue;
+        this.equipSound = equipSound;
+        this.toughness = toughness;
+        this.knockbackResistance = knockbackResistance;
+        this.repairIngredient = repairIngredient;
+    }
+
+    @Override
+    public int getDurabilityForType(ArmorItem.Type type) {
+        int base = switch (type) {
+            case HELMET -> 13;
+            case CHESTPLATE -> 16;
+            case LEGGINGS -> 15;
+            case BOOTS -> 11;
+        };
+        return base * this.durabilityMultiplier;
+    }
+
+    @Override
+    public int getDefenseForType(ArmorItem.Type type) {
+        return switch (type) {
+            case HELMET -> 3;
+            case CHESTPLATE -> 8;
+            case LEGGINGS -> 6;
+            case BOOTS -> 3;
+        };
+    }
+
+    @Override
+    public int getEnchantmentValue() {
+        return this.enchantmentValue;
+    }
+
+    @Override
+    public SoundEvent getEquipSound() {
+        return this.equipSound;
+    }
+
+    @Override
+    public Ingredient getRepairIngredient() {
+        return this.repairIngredient.get();
+    }
+
+    @Override
+    public String getName() {
+        return RubyMod.MOD_ID + ":" + this.name;
+    }
+
+    @Override
+    public float getToughness() {
+        return this.toughness;
+    }
+
+    @Override
+    public float getKnockbackResistance() {
+        return this.knockbackResistance;
     }
 }

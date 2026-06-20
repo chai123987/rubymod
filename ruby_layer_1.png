@@ -1,1 +1,4 @@
-{ "parent": "rubymod:block/ruby_ore" }
+{
+  "parent": "minecraft:item/generated",
+  "textures": { "layer0": "rubymod:item/ruby_leggings" }
+}

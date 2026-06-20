@@ -1,4 +1,4 @@
 {
-  "parent": "minecraft:item/handheld",
-  "textures": { "layer0": "rubymod:item/ruby_axe" }
+  "parent": "minecraft:item/generated",
+  "textures": { "layer0": "rubymod:item/ruby_helmet" }
 }

@@ -1,4 +1,1 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": { "layer0": "rubymod:item/ruby_leggings" }
-}
+{ "parent": "minecraft:item/template_spawn_egg" }

@@ -1,1 +1,4 @@
-{ "parent": "rubymod:block/deepslate_ruby_ore" }
+{
+  "parent": "minecraft:item/handheld",
+  "textures": { "layer0": "rubymod:item/ruby_axe" }
+}

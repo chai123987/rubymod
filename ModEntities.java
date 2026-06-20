@@ -12,6 +12,7 @@ import net.tutorial.rubymod.entity.ModEntities;
 import net.tutorial.rubymod.entity.custom.RubyCreeperEntity;
 import net.tutorial.rubymod.entity.custom.RubySkeletonEntity;
 import net.tutorial.rubymod.entity.custom.RubyGolemEntity;
+import net.tutorial.rubymod.entity.custom.AdamantineRubyGolemEntity;
 
 @Mod.EventBusSubscriber(modid = RubyMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEvents {
@@ -21,6 +22,7 @@ public class ModEvents {
         event.put(ModEntities.RUBY_GOLEM.get(), RubyGolemEntity.createAttributes().build());
         event.put(ModEntities.RUBY_CREEPER.get(), RubyCreeperEntity.createAttributes().build());
         event.put(ModEntities.RUBY_SKELETON.get(), RubySkeletonEntity.createAttributes().build());
+        event.put(ModEntities.ADAMANTINE_RUBY_GOLEM.get(), AdamantineRubyGolemEntity.createAttributes().build());
     }
 
     @SubscribeEvent

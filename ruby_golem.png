@@ -1,4 +1,4 @@
 {
   "parent": "minecraft:item/handheld",
-  "textures": { "layer0": "rubymod:item/ruby_sword" }
+  "textures": { "layer0": "rubymod:item/ruby_pickaxe" }
 }
