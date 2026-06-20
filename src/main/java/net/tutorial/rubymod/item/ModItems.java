@@ -1,5 +1,7 @@
 package net.tutorial.rubymod.item;
 
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.SwordItem;
@@ -27,6 +29,20 @@ public class ModItems {
     // 红宝石镐（自定义红宝石等级：速度10、耐久2000）
     public static final RegistryObject<Item> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe",
             () -> new PickaxeItem(ModToolTiers.RUBY, 1, -2.8F, new Item.Properties()));
+
+    // 红宝石斧（自定义红宝石等级，伤害/速度同钻石斧）
+    public static final RegistryObject<Item> RUBY_AXE = ITEMS.register("ruby_axe",
+            () -> new AxeItem(ModToolTiers.RUBY, 5.0F, -3.0F, new Item.Properties()));
+
+    // 红宝石盔甲：头盔、胸甲、护腿、靴子
+    public static final RegistryObject<Item> RUBY_HELMET = ITEMS.register("ruby_helmet",
+            () -> new ArmorItem(ModArmorMaterials.RUBY, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> RUBY_CHESTPLATE = ITEMS.register("ruby_chestplate",
+            () -> new ArmorItem(ModArmorMaterials.RUBY, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<Item> RUBY_LEGGINGS = ITEMS.register("ruby_leggings",
+            () -> new ArmorItem(ModArmorMaterials.RUBY, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryObject<Item> RUBY_BOOTS = ITEMS.register("ruby_boots",
+            () -> new ArmorItem(ModArmorMaterials.RUBY, ArmorItem.Type.BOOTS, new Item.Properties()));
 
     // 红宝石傀儡刷怪蛋
     public static final RegistryObject<Item> RUBY_GOLEM_SPAWN_EGG = ITEMS.register("ruby_golem_spawn_egg",

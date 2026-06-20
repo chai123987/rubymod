@@ -2,6 +2,11 @@
     "item.rubymod.ruby": "红宝石",
     "item.rubymod.ruby_sword": "红宝石剑",
     "item.rubymod.ruby_pickaxe": "红宝石镐",
+    "item.rubymod.ruby_axe": "红宝石斧",
+    "item.rubymod.ruby_helmet": "红宝石头盔",
+    "item.rubymod.ruby_chestplate": "红宝石胸甲",
+    "item.rubymod.ruby_leggings": "红宝石护腿",
+    "item.rubymod.ruby_boots": "红宝石靴子",
     "item.rubymod.ruby_golem_spawn_egg": "红宝石傀儡刷怪蛋",
 
     "block.rubymod.ruby_block": "红宝石块",
