@@ -15,6 +15,8 @@ import net.tutorial.rubymod.entity.custom.RubyGolemEntity;
 import net.tutorial.rubymod.entity.custom.AdamantineRubyGolemEntity;
 import net.tutorial.rubymod.entity.custom.RubySpiderEntity;
 import net.tutorial.rubymod.entity.custom.RubyEvokerEntity;
+import net.tutorial.rubymod.entity.custom.RubyPillagerEntity;
+import net.tutorial.rubymod.entity.custom.RubyPlayerEntity;
 
 @Mod.EventBusSubscriber(modid = RubyMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEvents {
@@ -27,6 +29,8 @@ public class ModEvents {
         event.put(ModEntities.ADAMANTINE_RUBY_GOLEM.get(), AdamantineRubyGolemEntity.createAttributes().build());
         event.put(ModEntities.RUBY_SPIDER.get(), RubySpiderEntity.createAttributes().build());
         event.put(ModEntities.RUBY_EVOKER.get(), RubyEvokerEntity.createAttributes().build());
+        event.put(ModEntities.RUBY_PILLAGER.get(), RubyPillagerEntity.createAttributes().build());
+        event.put(ModEntities.RUBY_PLAYER.get(), RubyPlayerEntity.createAttributes().build());
     }
 
     @SubscribeEvent
@@ -55,5 +59,18 @@ public class ModEvents {
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules,
                 SpawnPlacementRegisterEvent.Operation.AND);
+
+        event.register(ModEntities.RUBY_EVOKER.get(),
+                SpawnPlacements.Type.ON_GROUND,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules,
+                SpawnPlacementRegisterEvent.Operation.AND);
+
+        event.register(ModEntities.RUBY_PILLAGER.get(),
+                SpawnPlacements.Type.ON_GROUND,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules,
+                SpawnPlacementRegisterEvent.Operation.AND);
+        // 注意：红宝石玩家是BOSS，只能用刷怪蛋放，不注册自然生成
     }
 }

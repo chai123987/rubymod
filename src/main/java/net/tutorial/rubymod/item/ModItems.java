@@ -74,6 +74,14 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntities.RUBY_EVOKER, 0xC86464, 0x7A1414,
                     new Item.Properties()));
 
+    public static final RegistryObject<Item> RUBY_PILLAGER_SPAWN_EGG = ITEMS.register("ruby_pillager_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.RUBY_PILLAGER, 0xB24545, 0x5A0A0A,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> RUBY_PLAYER_SPAWN_EGG = ITEMS.register("ruby_player_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.RUBY_PLAYER, 0xC42A2A, 0xFFD700,
+                    new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

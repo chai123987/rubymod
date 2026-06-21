@@ -14,6 +14,8 @@ import net.tutorial.rubymod.entity.custom.AdamantineRubyGolemEntity;
 import net.tutorial.rubymod.entity.custom.RubySpiderEntity;
 import net.tutorial.rubymod.entity.custom.RubyEvokerEntity;
 import net.tutorial.rubymod.entity.custom.RubyEvokerFangsEntity;
+import net.tutorial.rubymod.entity.custom.RubyPillagerEntity;
+import net.tutorial.rubymod.entity.custom.RubyPlayerEntity;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
@@ -65,6 +67,18 @@ public class ModEntities {
                             .clientTrackingRange(6)
                             .updateInterval(2)
                             .build("ruby_evoker_fangs"));
+
+    public static final RegistryObject<EntityType<RubyPillagerEntity>> RUBY_PILLAGER =
+            ENTITY_TYPES.register("ruby_pillager",
+                    () -> EntityType.Builder.of(RubyPillagerEntity::new, MobCategory.MONSTER)
+                            .sized(0.6f, 1.95f) // 和原版掠夺者一样大
+                            .build("ruby_pillager"));
+
+    public static final RegistryObject<EntityType<RubyPlayerEntity>> RUBY_PLAYER =
+            ENTITY_TYPES.register("ruby_player",
+                    () -> EntityType.Builder.of(RubyPlayerEntity::new, MobCategory.MONSTER)
+                            .sized(0.6f, 1.95f) // 和玩家一样大
+                            .build("ruby_player"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

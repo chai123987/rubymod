@@ -15,6 +15,8 @@ import net.tutorial.rubymod.entity.client.AdamantineRubyGolemRenderer;
 import net.tutorial.rubymod.entity.client.RubySpiderRenderer;
 import net.tutorial.rubymod.entity.client.RubyEvokerRenderer;
 import net.tutorial.rubymod.entity.client.RubyEvokerFangsRenderer;
+import net.tutorial.rubymod.entity.client.RubyPillagerRenderer;
+import net.tutorial.rubymod.entity.client.RubyPlayerRenderer;
 
 // value = Dist.CLIENT：整个类只在客户端加载，专门处理渲染注册
 @Mod.EventBusSubscriber(modid = RubyMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -34,5 +36,7 @@ public class ModClientEvents {
         event.registerEntityRenderer(ModEntities.RUBY_SPIDER.get(), RubySpiderRenderer::new);
         event.registerEntityRenderer(ModEntities.RUBY_EVOKER.get(), RubyEvokerRenderer::new);
         event.registerEntityRenderer(ModEntities.RUBY_EVOKER_FANGS.get(), RubyEvokerFangsRenderer::new);
+        event.registerEntityRenderer(ModEntities.RUBY_PILLAGER.get(), RubyPillagerRenderer::new);
+        event.registerEntityRenderer(ModEntities.RUBY_PLAYER.get(), RubyPlayerRenderer::new);
     }
 }

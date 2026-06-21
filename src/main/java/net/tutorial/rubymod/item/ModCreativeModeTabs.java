@@ -35,6 +35,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.ADAMANTINE_RUBY_GOLEM_SPAWN_EGG.get());
                         output.accept(ModItems.RUBY_SPIDER_SPAWN_EGG.get());
                         output.accept(ModItems.RUBY_EVOKER_SPAWN_EGG.get());
+                        output.accept(ModItems.RUBY_PILLAGER_SPAWN_EGG.get());
+                        output.accept(ModItems.RUBY_PLAYER_SPAWN_EGG.get());
                         output.accept(ModBlocks.RUBY_BLOCK.get());
                         output.accept(ModBlocks.RUBY_ORE.get());
                         output.accept(ModBlocks.DEEPSLATE_RUBY_ORE.get());
