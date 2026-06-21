@@ -29,6 +29,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.RUBY_CHESTPLATE.get());
                         output.accept(ModItems.RUBY_LEGGINGS.get());
                         output.accept(ModItems.RUBY_BOOTS.get());
+                        output.accept(ModItems.AGGRO_STAFF.get());
                         output.accept(ModItems.RUBY_GOLEM_SPAWN_EGG.get());
                         output.accept(ModItems.RUBY_CREEPER_SPAWN_EGG.get());
                         output.accept(ModItems.RUBY_SKELETON_SPAWN_EGG.get());

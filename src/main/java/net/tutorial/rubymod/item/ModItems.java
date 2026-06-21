@@ -13,6 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.tutorial.rubymod.RubyMod;
 import net.tutorial.rubymod.entity.ModEntities;
+import net.tutorial.rubymod.item.custom.AggroStaffItem;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -81,6 +82,9 @@ public class ModItems {
     public static final RegistryObject<Item> RUBY_PLAYER_SPAWN_EGG = ITEMS.register("ruby_player_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.RUBY_PLAYER, 0xC42A2A, 0xFFD700,
                     new Item.Properties()));
+
+    public static final RegistryObject<Item> AGGRO_STAFF = ITEMS.register("aggro_staff",
+            () -> new AggroStaffItem(new Item.Properties().stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
