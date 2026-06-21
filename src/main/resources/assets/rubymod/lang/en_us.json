@@ -27,5 +27,6 @@
   "entity.rubymod.ruby_pillager": "Ruby Pillager",
   "entity.rubymod.ruby_player": "Ruby Player",
   "item.rubymod.ruby_pillager_spawn_egg": "Ruby Pillager Spawn Egg",
-  "item.rubymod.ruby_player_spawn_egg": "Ruby Player Spawn Egg"
+  "item.rubymod.ruby_player_spawn_egg": "Ruby Player Spawn Egg",
+  "item.rubymod.aggro_staff": "Aggro Staff"
 }
