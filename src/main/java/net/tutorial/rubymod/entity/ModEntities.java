@@ -13,6 +13,7 @@ import net.tutorial.rubymod.entity.custom.RubyGolemEntity;
 import net.tutorial.rubymod.entity.custom.AdamantineRubyGolemEntity;
 import net.tutorial.rubymod.entity.custom.RubySpiderEntity;
 import net.tutorial.rubymod.entity.custom.RubyEvokerEntity;
+import net.tutorial.rubymod.entity.custom.RubyEvokerFangsEntity;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
@@ -56,6 +57,14 @@ public class ModEntities {
                     () -> EntityType.Builder.of(RubyEvokerEntity::new, MobCategory.MONSTER)
                             .sized(0.6f, 1.95f) // 和原版唤魔者一样大
                             .build("ruby_evoker"));
+
+    public static final RegistryObject<EntityType<RubyEvokerFangsEntity>> RUBY_EVOKER_FANGS =
+            ENTITY_TYPES.register("ruby_evoker_fangs",
+                    () -> EntityType.Builder.<RubyEvokerFangsEntity>of(RubyEvokerFangsEntity::new, MobCategory.MISC)
+                            .sized(0.5f, 0.8f)
+                            .clientTrackingRange(6)
+                            .updateInterval(2)
+                            .build("ruby_evoker_fangs"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

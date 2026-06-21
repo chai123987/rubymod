@@ -4,7 +4,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.PathfinderMob;
@@ -44,6 +46,7 @@ public class RubyEvokerEntity extends SpellcasterIllager {
         this.goalSelector.addGoal(1, new SpellcasterCastingSpellGoal());
         this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 0.6D, 1.0D));
         this.goalSelector.addGoal(4, new RubySummonSpellGoal());
+        this.goalSelector.addGoal(5, new RubyFangsSpellGoal());
         this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.6D));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
@@ -63,6 +66,14 @@ public class RubyEvokerEntity extends SpellcasterIllager {
                 mob.setTarget(this.getTarget());
             }
             level.addFreshEntity(mob);
+        }
+    }
+
+    // 在指定位置生成一根红色尖刺
+    private void createFang(double x, double z, double y, float yRot) {
+        if (this.level() instanceof ServerLevel serverLevel) {
+            serverLevel.addFreshEntity(
+                    RubyEvokerFangsEntity.create(serverLevel, x, y, z, yRot, this));
         }
     }
 
@@ -106,8 +117,8 @@ public class RubyEvokerEntity extends SpellcasterIllager {
             }
             RubyEvokerEntity.this.summonMinion(serverLevel, ModEntities.RUBY_SKELETON.get());
             RubyEvokerEntity.this.summonMinion(serverLevel, ModEntities.RUBY_SKELETON.get());
-            RubyEvokerEntity.this.summonMinion(serverLevel, ModEntities.RUBY_SKELETON.get());
-            RubyEvokerEntity.this.summonMinion(serverLevel, ModEntities.RUBY_CREEPER.get());
+            RubyEvokerEntity.this.summonMinion(serverLevel, ModEntities.RUBY_GOLEM.get());
+            RubyEvokerEntity.this.summonMinion(serverLevel, ModEntities.RUBY_GOLEM.get());
         }
 
         @Override
@@ -128,6 +139,59 @@ public class RubyEvokerEntity extends SpellcasterIllager {
         @Override
         protected SpellcasterIllager.IllagerSpell getSpell() {
             return SpellcasterIllager.IllagerSpell.SUMMON_VEX; // 借用召唤动画/粒子
+        }
+    }
+
+    // ===== 尖刺法术：突发一排/一圈红色尖刺（和原版唤魔者的尖刺一样）=====
+    class RubyFangsSpellGoal extends SpellcasterIllager.SpellcasterUseSpellGoal {
+
+        @Override
+        protected void performSpellCasting() {
+            LivingEntity target = RubyEvokerEntity.this.getTarget();
+            if (target == null) {
+                return;
+            }
+            double baseY = Math.min(target.getY(), RubyEvokerEntity.this.getY());
+            float angle = (float) Mth.atan2(target.getZ() - RubyEvokerEntity.this.getZ(),
+                    target.getX() - RubyEvokerEntity.this.getX());
+
+            if (RubyEvokerEntity.this.distanceToSqr(target) < 9.0D) {
+                // 近身：身边扇形一圈
+                for (int i = 0; i < 5; i++) {
+                    float a = angle + (float) i * (float) Math.PI * 0.4F;
+                    RubyEvokerEntity.this.createFang(
+                            RubyEvokerEntity.this.getX() + (double) Mth.cos(a) * 1.5D,
+                            RubyEvokerEntity.this.getZ() + (double) Mth.sin(a) * 1.5D, baseY, a);
+                }
+            } else {
+                // 远处：朝目标方向射出一条直线
+                for (int l = 0; l < 16; l++) {
+                    double dist = 1.25D * (double) (l + 1);
+                    RubyEvokerEntity.this.createFang(
+                            RubyEvokerEntity.this.getX() + (double) Mth.cos(angle) * dist,
+                            RubyEvokerEntity.this.getZ() + (double) Mth.sin(angle) * dist, baseY, angle);
+                }
+            }
+        }
+
+        @Override
+        protected int getCastingTime() {
+            return 40;
+        }
+
+        @Override
+        protected int getCastingInterval() {
+            return 100;
+        }
+
+        @Override
+        protected SoundEvent getSpellPrepareSound() {
+            return SoundEvents.EVOKER_PREPARE_ATTACK;
+        }
+
+        @Override
+        protected SpellcasterIllager.IllagerSpell getSpell() {
+            return SpellcasterIllager.IllagerSpell.FANGS;
         }
     }
 }
