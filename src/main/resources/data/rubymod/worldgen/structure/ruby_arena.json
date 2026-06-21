@@ -1,6 +1,6 @@
 {
   "type": "minecraft:jigsaw",
-  "biomes": "#rubymod:has_ruby_arena",
+  "biomes": "#minecraft:is_overworld",
   "step": "surface_structures",
   "spawn_overrides": {},
   "start_pool": "rubymod:ruby_arena/start_pool",

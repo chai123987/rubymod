@@ -23,5 +23,9 @@
   "entity.rubymod.ruby_spider": "Ruby Spider",
   "item.rubymod.ruby_evoker_spawn_egg": "Ruby Evoker Spawn Egg",
   "entity.rubymod.ruby_evoker": "Ruby Evoker",
-  "entity.rubymod.ruby_evoker_fangs": "Ruby Evoker Fangs"
+  "entity.rubymod.ruby_evoker_fangs": "Ruby Evoker Fangs",
+  "entity.rubymod.ruby_pillager": "Ruby Pillager",
+  "entity.rubymod.ruby_player": "Ruby Player",
+  "item.rubymod.ruby_pillager_spawn_egg": "Ruby Pillager Spawn Egg",
+  "item.rubymod.ruby_player_spawn_egg": "Ruby Player Spawn Egg"
 }
