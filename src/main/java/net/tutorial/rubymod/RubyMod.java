@@ -13,7 +13,11 @@ import net.tutorial.rubymod.entity.ModEntities;
 import net.tutorial.rubymod.item.ModCreativeModeTabs;
 import net.tutorial.rubymod.item.ModItems;
 import net.tutorial.rubymod.item.ModToolTiers;
+import net.tutorial.rubymod.worldgen.biome.ModSurfaceRules;
+import net.tutorial.rubymod.worldgen.biome.RubyRegion;
 import org.slf4j.Logger;
+import terrablender.api.Regions;
+import terrablender.api.SurfaceRuleManager;
 
 import java.util.List;
 
@@ -42,6 +46,12 @@ public class RubyMod {
                     List.of(Tiers.DIAMOND),
                     List.of(Tiers.NETHERITE)
             );
+
+            // 注册红宝石群系（权重 4，数字越大出现越频繁）
+            Regions.register(new RubyRegion(new ResourceLocation(MOD_ID, "ruby_region"), 4));
+            // 注册红宝石群系的地表规则（红宝石草 + 泥土）
+            SurfaceRuleManager.addSurfaceRules(
+                    SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID, ModSurfaceRules.makeRules());
         });
         LOGGER.info("RubyMod common setup complete");
     }
