@@ -1,0 +1,11 @@
+{
+  "structures": [
+    { "structure": "rubymod:ruby_ruins", "weight": 1 }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 32,
+    "separation": 11,
+    "salt": 60192847
+  }
+}
