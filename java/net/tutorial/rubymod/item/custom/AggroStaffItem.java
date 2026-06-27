@@ -2,7 +2,6 @@ package net.tutorial.rubymod.item.custom;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -22,10 +21,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class AggroStaffItem extends Item {
+
+    // 存在服务器里（按玩家ID记），不存物品NBT —— 这样创造模式也不会被刷掉
+    private static final Map<UUID, UUID> FIRST_TARGET = new HashMap<>();
+    private static final Map<UUID, Boolean> SPECIES_MODE = new HashMap<>();
 
     public AggroStaffItem(Properties properties) {
         super(properties);
@@ -36,16 +41,16 @@ public class AggroStaffItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         if (!level.isClientSide) {
-            CompoundTag tag = stack.getOrCreateTag();
+            UUID pid = player.getUUID();
             if (player.isShiftKeyDown()) {
-                boolean species = !tag.getBoolean("SpeciesMode");
-                tag.putBoolean("SpeciesMode", species);
-                tag.remove("FirstTarget");
+                boolean species = !SPECIES_MODE.getOrDefault(pid, false);
+                SPECIES_MODE.put(pid, species);
+                FIRST_TARGET.remove(pid);
                 player.displayClientMessage(Component.literal(species
                         ? "§e仇恨法杖 → 种族模式（同类一起开打）"
                         : "§e仇恨法杖 → 单体模式（只让两只开打）"), true);
             } else {
-                tag.remove("FirstTarget");
+                FIRST_TARGET.remove(pid);
                 player.displayClientMessage(Component.literal("§7已清空选择"), true);
             }
         }
@@ -64,11 +69,12 @@ public class AggroStaffItem extends Item {
             return InteractionResult.SUCCESS;
         }
 
-        CompoundTag tag = stack.getOrCreateTag();
+        UUID pid = player.getUUID();
+        UUID firstId = FIRST_TARGET.get(pid);
 
         // 还没选第一个 → 记下它
-        if (!tag.hasUUID("FirstTarget")) {
-            tag.putUUID("FirstTarget", target.getUUID());
+        if (firstId == null) {
+            FIRST_TARGET.put(pid, target.getUUID());
             player.displayClientMessage(Component.literal(
                     "§a已选中：" + target.getName().getString() + " §7（再右键另一个生物）"), true);
             level.playSound(null, target.getX(), target.getY(), target.getZ(),
@@ -77,8 +83,7 @@ public class AggroStaffItem extends Item {
         }
 
         // 已有第一个 → 这次是 B
-        UUID firstId = tag.getUUID("FirstTarget");
-        tag.remove("FirstTarget");
+        FIRST_TARGET.remove(pid);
         Entity first = ((ServerLevel) level).getEntity(firstId);
         if (!(first instanceof Mob mobA)) {
             player.displayClientMessage(Component.literal("§c第一个目标不见了，请重新选"), true);
@@ -90,7 +95,7 @@ public class AggroStaffItem extends Item {
             return InteractionResult.SUCCESS;
         }
 
-        boolean species = tag.getBoolean("SpeciesMode");
+        boolean species = SPECIES_MODE.getOrDefault(pid, false);
         if (species) {
             int n = makeSpeciesFight(level, player, mobA.getType(), mobB.getType());
             player.displayClientMessage(Component.literal("§6种族大战开始！参战 " + n + " 只生物"), true);
@@ -110,10 +115,14 @@ public class AggroStaffItem extends Item {
 
     // 让两只互相仇恨
     private void makeFight(Mob a, Mob b) {
-        a.setTarget(b);
-        a.setLastHurtByMob(b);
-        b.setTarget(a);
-        b.setLastHurtByMob(a);
+        forceAttack(a, b);
+        forceAttack(b, a);
+    }
+
+    private void forceAttack(Mob attacker, Mob victim) {
+        attacker.setTarget(victim);
+        attacker.setLastHurtByMob(victim);
+        attacker.setAggressive(true);
     }
 
     // 种族模式：附近所有 A 类去打最近的 B 类，反之亦然
@@ -128,11 +137,11 @@ public class AggroStaffItem extends Item {
         }
         for (Mob a : as) {
             Mob t = nearest(a, bs);
-            if (t != null) { a.setTarget(t); a.setLastHurtByMob(t); }
+            if (t != null) forceAttack(a, t);
         }
         for (Mob b : bs) {
             Mob t = nearest(b, as);
-            if (t != null) { b.setTarget(t); b.setLastHurtByMob(t); }
+            if (t != null) forceAttack(b, t);
         }
         return as.size() + bs.size();
     }
@@ -152,15 +161,11 @@ public class AggroStaffItem extends Item {
                 m.getX(), m.getEyeY() + 0.5D, m.getZ(), 8, 0.3D, 0.3D, 0.3D, 0.0D);
     }
 
-    // 鼠标悬停显示当前模式 + 用法
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> tip, TooltipFlag flag) {
-        boolean species = stack.getTag() != null && stack.getTag().getBoolean("SpeciesMode");
-        tip.add(Component.literal(species ? "模式：种族大战" : "模式：单体对决")
-                .withStyle(ChatFormatting.GOLD));
         tip.add(Component.literal("右键生物A，再右键生物B → 它俩开打")
                 .withStyle(ChatFormatting.GRAY));
-        tip.add(Component.literal("潜行+右键空地 → 切换模式")
+        tip.add(Component.literal("潜行+右键空地 → 切换 单体/种族 模式")
                 .withStyle(ChatFormatting.GRAY));
         super.appendHoverText(stack, level, tip, flag);
     }
