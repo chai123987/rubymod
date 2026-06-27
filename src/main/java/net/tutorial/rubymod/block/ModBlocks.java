@@ -35,6 +35,10 @@ public class ModBlocks {
             () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)
                     .requiresCorrectToolForDrops(), UniformInt.of(3, 7)));
 
+    // 4) 红宝石草方块（只在红宝石群系当地表，做好后由群系生成）
+    public static final RegistryObject<Block> RUBY_GRASS_BLOCK = registerBlock("ruby_grass_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)));
+
     // 注册方块的同时，自动注册一个对应的 BlockItem（这样背包里才有这个方块）
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

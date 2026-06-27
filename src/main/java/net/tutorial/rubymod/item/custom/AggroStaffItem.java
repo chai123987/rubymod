@@ -28,6 +28,7 @@ import java.util.UUID;
 
 public class AggroStaffItem extends Item {
 
+    // 存在服务器里（按玩家ID记），不存物品NBT —— 这样创造模式也不会被刷掉
     private static final Map<UUID, UUID> FIRST_TARGET = new HashMap<>();
     private static final Map<UUID, Boolean> SPECIES_MODE = new HashMap<>();
 
@@ -35,6 +36,7 @@ public class AggroStaffItem extends Item {
         super(properties);
     }
 
+    // 右键空气：潜行=切换模式；普通=清空当前选择
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
@@ -55,6 +57,7 @@ public class AggroStaffItem extends Item {
         return InteractionResultHolder.success(stack);
     }
 
+    // 右键生物：第一次选中A，第二次让A和B打起来
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player,
                                                   LivingEntity target, InteractionHand hand) {
@@ -69,6 +72,7 @@ public class AggroStaffItem extends Item {
         UUID pid = player.getUUID();
         UUID firstId = FIRST_TARGET.get(pid);
 
+        // 还没选第一个 → 记下它
         if (firstId == null) {
             FIRST_TARGET.put(pid, target.getUUID());
             player.displayClientMessage(Component.literal(
@@ -78,6 +82,7 @@ public class AggroStaffItem extends Item {
             return InteractionResult.SUCCESS;
         }
 
+        // 已有第一个 → 这次是 B
         FIRST_TARGET.remove(pid);
         Entity first = ((ServerLevel) level).getEntity(firstId);
         if (!(first instanceof Mob mobA)) {
@@ -108,6 +113,7 @@ public class AggroStaffItem extends Item {
         return InteractionResult.SUCCESS;
     }
 
+    // 让两只互相仇恨
     private void makeFight(Mob a, Mob b) {
         forceAttack(a, b);
         forceAttack(b, a);
@@ -119,6 +125,7 @@ public class AggroStaffItem extends Item {
         attacker.setAggressive(true);
     }
 
+    // 种族模式：附近所有 A 类去打最近的 B 类，反之亦然
     private int makeSpeciesFight(Level level, Player player, EntityType<?> typeA, EntityType<?> typeB) {
         AABB area = player.getBoundingBox().inflate(40.0D);
         List<Mob> all = level.getEntitiesOfClass(Mob.class, area);

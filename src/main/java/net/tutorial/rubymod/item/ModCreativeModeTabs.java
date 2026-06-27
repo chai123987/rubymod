@@ -41,6 +41,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.RUBY_BLOCK.get());
                         output.accept(ModBlocks.RUBY_ORE.get());
                         output.accept(ModBlocks.DEEPSLATE_RUBY_ORE.get());
+                        output.accept(ModBlocks.RUBY_GRASS_BLOCK.get());
                     })
                     .build());
 
