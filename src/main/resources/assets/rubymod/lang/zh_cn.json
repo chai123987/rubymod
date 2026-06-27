@@ -29,5 +29,9 @@
   "item.rubymod.ruby_pillager_spawn_egg": "红宝石掠夺者刷怪蛋",
   "item.rubymod.ruby_player_spawn_egg": "红宝石玩家刷怪蛋",
   "item.rubymod.aggro_staff": "仇恨法杖",
-  "block.rubymod.ruby_grass_block": "红宝石草方块"
+  "block.rubymod.ruby_grass_block": "红宝石草方块",
+  "block.rubymod.ruby_log": "红宝石原木",
+  "block.rubymod.ruby_leaves": "红宝石树叶",
+  "block.rubymod.ruby_sapling": "红宝石树苗",
+  "block.rubymod.ruby_planks": "红宝石木板"
 }
