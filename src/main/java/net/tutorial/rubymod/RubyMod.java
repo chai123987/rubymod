@@ -47,8 +47,8 @@ public class RubyMod {
                     List.of(Tiers.NETHERITE)
             );
 
-            // 注册红宝石群系（权重 4，数字越大出现越频繁）
-            Regions.register(new RubyRegion(new ResourceLocation(MOD_ID, "ruby_region"), 4));
+            // 注册红宝石群系（权重 2，比之前更低 → 整体更少见；配合收窄的气候参数，成大块出现）
+            Regions.register(new RubyRegion(new ResourceLocation(MOD_ID, "ruby_region"), 2));
             // 注册红宝石群系的地表规则（红宝石草 + 泥土）
             SurfaceRuleManager.addSurfaceRules(
                     SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID, ModSurfaceRules.makeRules());
