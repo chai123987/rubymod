@@ -7,4 +7,7 @@ import net.tutorial.rubymod.RubyMod;
 public class ModModelLayers {
     public static final ModelLayerLocation RUBY_GOLEM =
             new ModelLayerLocation(new ResourceLocation(RubyMod.MOD_ID, "ruby_golem"), "main");
+
+    public static final ModelLayerLocation BUTTERFLY =
+            new ModelLayerLocation(new ResourceLocation(RubyMod.MOD_ID, "butterfly"), "main");
 }

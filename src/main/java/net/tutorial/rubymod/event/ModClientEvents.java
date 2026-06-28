@@ -17,6 +17,8 @@ import net.tutorial.rubymod.entity.client.RubyEvokerRenderer;
 import net.tutorial.rubymod.entity.client.RubyEvokerFangsRenderer;
 import net.tutorial.rubymod.entity.client.RubyPillagerRenderer;
 import net.tutorial.rubymod.entity.client.RubyPlayerRenderer;
+import net.tutorial.rubymod.entity.client.ButterflyModel;
+import net.tutorial.rubymod.entity.client.ButterflyRenderer;
 
 // value = Dist.CLIENT：整个类只在客户端加载，专门处理渲染注册
 @Mod.EventBusSubscriber(modid = RubyMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -25,6 +27,7 @@ public class ModClientEvents {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModModelLayers.RUBY_GOLEM, RubyGolemModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.BUTTERFLY, ButterflyModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -38,5 +41,6 @@ public class ModClientEvents {
         event.registerEntityRenderer(ModEntities.RUBY_EVOKER_FANGS.get(), RubyEvokerFangsRenderer::new);
         event.registerEntityRenderer(ModEntities.RUBY_PILLAGER.get(), RubyPillagerRenderer::new);
         event.registerEntityRenderer(ModEntities.RUBY_PLAYER.get(), RubyPlayerRenderer::new);
+        event.registerEntityRenderer(ModEntities.BUTTERFLY.get(), ButterflyRenderer::new);
     }
 }

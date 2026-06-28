@@ -16,6 +16,7 @@ import net.tutorial.rubymod.entity.custom.RubyEvokerEntity;
 import net.tutorial.rubymod.entity.custom.RubyEvokerFangsEntity;
 import net.tutorial.rubymod.entity.custom.RubyPillagerEntity;
 import net.tutorial.rubymod.entity.custom.RubyPlayerEntity;
+import net.tutorial.rubymod.entity.custom.ButterflyEntity;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
@@ -79,6 +80,14 @@ public class ModEntities {
                     () -> EntityType.Builder.of(RubyPlayerEntity::new, MobCategory.MONSTER)
                             .sized(0.6f, 1.95f) // 和玩家一样大
                             .build("ruby_player"));
+
+    // 蝴蝶：友好飞行生物（CREATURE 类别，和动物一样被动）
+    public static final RegistryObject<EntityType<ButterflyEntity>> BUTTERFLY =
+            ENTITY_TYPES.register("butterfly",
+                    () -> EntityType.Builder.of(ButterflyEntity::new, MobCategory.CREATURE)
+                            .sized(0.6f, 0.5f)
+                            .clientTrackingRange(8)
+                            .build("butterfly"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

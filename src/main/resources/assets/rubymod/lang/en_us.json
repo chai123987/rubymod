@@ -34,5 +34,8 @@
   "block.rubymod.ruby_leaves": "Ruby Leaves",
   "block.rubymod.ruby_sapling": "Ruby Sapling",
   "block.rubymod.ruby_planks": "Ruby Planks",
-  "biome.rubymod.ruby_biome": "Ruby Biome"
+  "biome.rubymod.ruby_biome": "Ruby Biome",
+  "entity.rubymod.butterfly": "Butterfly",
+  "item.rubymod.butterfly_spawn_egg": "Butterfly Spawn Egg",
+  "subtitles.rubymod.butterfly_flap": "Butterfly flutters"
 }

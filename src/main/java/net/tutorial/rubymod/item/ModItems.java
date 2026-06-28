@@ -83,6 +83,11 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntities.RUBY_PLAYER, 0xC42A2A, 0xFFD700,
                     new Item.Properties()));
 
+    // 蝴蝶刷怪蛋（会被加进原版的"刷怪蛋"创造栏）
+    public static final RegistryObject<Item> BUTTERFLY_SPAWN_EGG = ITEMS.register("butterfly_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.BUTTERFLY, 0xE07A1E, 0x3A2A20,
+                    new Item.Properties()));
+
     public static final RegistryObject<Item> AGGRO_STAFF = ITEMS.register("aggro_staff",
             () -> new AggroStaffItem(new Item.Properties().stacksTo(1)));
 

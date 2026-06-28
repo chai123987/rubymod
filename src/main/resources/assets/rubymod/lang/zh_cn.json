@@ -34,5 +34,8 @@
   "block.rubymod.ruby_leaves": "红宝石树叶",
   "block.rubymod.ruby_sapling": "红宝石树苗",
   "block.rubymod.ruby_planks": "红宝石木板",
-  "biome.rubymod.ruby_biome": "红宝石群系"
+  "biome.rubymod.ruby_biome": "红宝石群系",
+  "entity.rubymod.butterfly": "蝴蝶",
+  "item.rubymod.butterfly_spawn_egg": "蝴蝶刷怪蛋",
+  "subtitles.rubymod.butterfly_flap": "蝴蝶振翅"
 }

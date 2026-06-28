@@ -13,6 +13,7 @@ import net.tutorial.rubymod.entity.ModEntities;
 import net.tutorial.rubymod.item.ModCreativeModeTabs;
 import net.tutorial.rubymod.item.ModItems;
 import net.tutorial.rubymod.item.ModToolTiers;
+import net.tutorial.rubymod.sound.ModSounds;
 import net.tutorial.rubymod.worldgen.biome.ModSurfaceRules;
 import net.tutorial.rubymod.worldgen.biome.RubyRegion;
 import org.slf4j.Logger;
@@ -33,6 +34,7 @@ public class RubyMod {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModEntities.register(modEventBus);
+        ModSounds.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
     }
