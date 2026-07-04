@@ -37,5 +37,7 @@
   "biome.rubymod.ruby_biome": "Ruby Biome",
   "entity.rubymod.butterfly": "Butterfly",
   "item.rubymod.butterfly_spawn_egg": "Butterfly Spawn Egg",
-  "subtitles.rubymod.butterfly_flap": "Butterfly flutters"
+  "subtitles.rubymod.butterfly_flap": "Butterfly flutters",
+  "entity.rubymod.ruby_enderman": "Ruby Enderman",
+  "item.rubymod.ruby_enderman_spawn_egg": "Ruby Enderman Spawn Egg"
 }

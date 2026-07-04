@@ -37,5 +37,7 @@
   "biome.rubymod.ruby_biome": "红宝石群系",
   "entity.rubymod.butterfly": "蝴蝶",
   "item.rubymod.butterfly_spawn_egg": "蝴蝶刷怪蛋",
-  "subtitles.rubymod.butterfly_flap": "蝴蝶振翅"
+  "subtitles.rubymod.butterfly_flap": "蝴蝶振翅",
+  "entity.rubymod.ruby_enderman": "红宝石末影人",
+  "item.rubymod.ruby_enderman_spawn_egg": "红宝石末影人刷怪蛋"
 }

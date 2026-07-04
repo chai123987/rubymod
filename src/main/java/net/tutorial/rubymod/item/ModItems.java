@@ -88,6 +88,10 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntities.BUTTERFLY, 0xE07A1E, 0x3A2A20,
                     new Item.Properties()));
 
+    public static final RegistryObject<Item> RUBY_ENDERMAN_SPAWN_EGG = ITEMS.register("ruby_enderman_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.RUBY_ENDERMAN, 0x8B0000, 0x3D0000,
+                    new Item.Properties()));
+
     public static final RegistryObject<Item> AGGRO_STAFF = ITEMS.register("aggro_staff",
             () -> new AggroStaffItem(new Item.Properties().stacksTo(1)));
 

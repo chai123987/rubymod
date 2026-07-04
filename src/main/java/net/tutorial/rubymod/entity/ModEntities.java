@@ -17,6 +17,7 @@ import net.tutorial.rubymod.entity.custom.RubyEvokerFangsEntity;
 import net.tutorial.rubymod.entity.custom.RubyPillagerEntity;
 import net.tutorial.rubymod.entity.custom.RubyPlayerEntity;
 import net.tutorial.rubymod.entity.custom.ButterflyEntity;
+import net.tutorial.rubymod.entity.custom.RubyEndermanEntity;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
@@ -88,6 +89,14 @@ public class ModEntities {
                             .sized(0.6f, 0.5f)
                             .clientTrackingRange(8)
                             .build("butterfly"));
+
+    // 红宝石末影人：强化版末影人，不怕水，血厚伤害高，有抓取技能
+    public static final RegistryObject<EntityType<RubyEndermanEntity>> RUBY_ENDERMAN =
+            ENTITY_TYPES.register("ruby_enderman",
+                    () -> EntityType.Builder.<RubyEndermanEntity>of(RubyEndermanEntity::new, MobCategory.MONSTER)
+                            .sized(0.6f, 2.9f)
+                            .clientTrackingRange(8)
+                            .build("ruby_enderman"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

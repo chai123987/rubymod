@@ -21,6 +21,7 @@ import net.tutorial.rubymod.entity.custom.RubyEvokerEntity;
 import net.tutorial.rubymod.entity.custom.RubyPillagerEntity;
 import net.tutorial.rubymod.entity.custom.RubyPlayerEntity;
 import net.tutorial.rubymod.entity.custom.ButterflyEntity;
+import net.tutorial.rubymod.entity.custom.RubyEndermanEntity;
 import net.tutorial.rubymod.item.ModItems;
 
 @Mod.EventBusSubscriber(modid = RubyMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -37,6 +38,7 @@ public class ModEvents {
         event.put(ModEntities.RUBY_PILLAGER.get(), RubyPillagerEntity.createAttributes().build());
         event.put(ModEntities.RUBY_PLAYER.get(), RubyPlayerEntity.createAttributes().build());
         event.put(ModEntities.BUTTERFLY.get(), ButterflyEntity.createAttributes().build());
+        event.put(ModEntities.RUBY_ENDERMAN.get(), RubyEndermanEntity.createAttributes().build());
     }
 
     @SubscribeEvent
@@ -85,13 +87,20 @@ public class ModEvents {
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Animal::checkAnimalSpawnRules,
                 SpawnPlacementRegisterEvent.Operation.AND);
+
+        event.register(ModEntities.RUBY_ENDERMAN.get(),
+                SpawnPlacements.Type.ON_GROUND,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules,
+                SpawnPlacementRegisterEvent.Operation.AND);
     }
 
-    // 把蝴蝶刷怪蛋放进【原版的"刷怪蛋"创造栏】
+    // 把蝴蝶和红宝石末影人刷怪蛋放进【原版的"刷怪蛋"创造栏】
     @SubscribeEvent
     public static void addSpawnEggToVanillaTab(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
             event.accept(ModItems.BUTTERFLY_SPAWN_EGG.get());
+            event.accept(ModItems.RUBY_ENDERMAN_SPAWN_EGG.get());
         }
     }
 }

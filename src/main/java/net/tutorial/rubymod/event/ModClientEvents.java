@@ -19,6 +19,7 @@ import net.tutorial.rubymod.entity.client.RubyPillagerRenderer;
 import net.tutorial.rubymod.entity.client.RubyPlayerRenderer;
 import net.tutorial.rubymod.entity.client.ButterflyModel;
 import net.tutorial.rubymod.entity.client.ButterflyRenderer;
+import net.tutorial.rubymod.entity.client.RubyEndermanRenderer;
 
 // value = Dist.CLIENT：整个类只在客户端加载，专门处理渲染注册
 @Mod.EventBusSubscriber(modid = RubyMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -42,5 +43,6 @@ public class ModClientEvents {
         event.registerEntityRenderer(ModEntities.RUBY_PILLAGER.get(), RubyPillagerRenderer::new);
         event.registerEntityRenderer(ModEntities.RUBY_PLAYER.get(), RubyPlayerRenderer::new);
         event.registerEntityRenderer(ModEntities.BUTTERFLY.get(), ButterflyRenderer::new);
+        event.registerEntityRenderer(ModEntities.RUBY_ENDERMAN.get(), RubyEndermanRenderer::new);
     }
 }
