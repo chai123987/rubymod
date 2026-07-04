@@ -20,4 +20,3 @@ public class RubyEndermanRenderer extends EndermanRenderer {
         return TEXTURE;
     }
 }
-}
