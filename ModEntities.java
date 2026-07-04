@@ -19,15 +19,25 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(ModEntities.RUBY_GOLEM.get(), RubyGolemEntity.createAttributes().build());
-        event.put(ModEntities.RUBY_CREEPER.get(), RubyCreeperEntity.createAttributes().build());
-        event.put(ModEntities.RUBY_SKELETON.get(), RubySkeletonEntity.createAttributes().build());
-        event.put(ModEntities.ADAMANTINE_RUBY_GOLEM.get(), AdamantineRubyGolemEntity.createAttributes().build());
+
+        event.put(ModEntities.RUBY_GOLEM.get(),
+                RubyGolemEntity.createAttributes().build());
+
+        event.put(ModEntities.RUBY_CREEPER.get(),
+                RubyCreeperEntity.createAttributes().build());
+
+        event.put(ModEntities.RUBY_SKELETON.get(),
+                RubySkeletonEntity.createAttributes().build());
+
+        event.put(ModEntities.ADAMANTINE_RUBY_GOLEM.get(),
+                AdamantineRubyGolemEntity.createAttributes().build());
+
+        // ❌ Butterfly 已删除（必须移除，否则编译失败）
     }
 
     @SubscribeEvent
     public static void registerSpawnPlacements(SpawnPlacementRegisterEvent event) {
-        // 怪物生成规则：在黑暗的地表生成
+
         event.register(ModEntities.RUBY_GOLEM.get(),
                 SpawnPlacements.Type.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
