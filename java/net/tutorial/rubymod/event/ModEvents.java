@@ -21,11 +21,12 @@ import net.tutorial.rubymod.entity.custom.RubyPlayerEntity;
 @Mod.EventBusSubscriber(modid = RubyMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEvents {
 
-    @SubscribeEvent
-    public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(ModEntities.RUBY_GOLEM.get(), RubyGolemEntity.createAttributes().build());
-        event.put(ModEntities.RUBY_CREEPER.get(), RubyCreeperEntity.createAttributes().build());
-        event.put(ModEntities.RUBY_SKELETON.get(), RubySkeletonEntity.createAttributes().build());
+   @SubscribeEvent
+    public static void addSpawnEggToVanillaTab(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
+            event.accept(ModItems.BUTTERFLY_SPAWN_EGG.get());
+        }
+    }
         event.put(ModEntities.ADAMANTINE_RUBY_GOLEM.get(), AdamantineRubyGolemEntity.createAttributes().build());
         event.put(ModEntities.RUBY_SPIDER.get(), RubySpiderEntity.createAttributes().build());
         event.put(ModEntities.RUBY_EVOKER.get(), RubyEvokerEntity.createAttributes().build());
