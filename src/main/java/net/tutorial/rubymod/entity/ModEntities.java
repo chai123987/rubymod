@@ -82,14 +82,6 @@ public class ModEntities {
                             .sized(0.6f, 1.95f) // 和玩家一样大
                             .build("ruby_player"));
 
-    // 蝴蝶：友好飞行生物（CREATURE 类别，和动物一样被动）
-    public static final RegistryObject<EntityType<ButterflyEntity>> BUTTERFLY =
-            ENTITY_TYPES.register("butterfly",
-                    () -> EntityType.Builder.of(ButterflyEntity::new, MobCategory.CREATURE)
-                            .sized(0.6f, 0.5f)
-                            .clientTrackingRange(8)
-                            .build("butterfly"));
-
     // 红宝石末影人：强化版末影人，不怕水，血厚伤害高，有抓取技能
     public static final RegistryObject<EntityType<RubyEndermanEntity>> RUBY_ENDERMAN =
             ENTITY_TYPES.register("ruby_enderman",
