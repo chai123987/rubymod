@@ -35,14 +35,6 @@ public class ModEvents {
         event.put(ModEntities.ADAMANTINE_RUBY_GOLEM.get(), AdamantineRubyGolemEntity.createAttributes().build());
         event.put(ModEntities.RUBY_SPIDER.get(), RubySpiderEntity.createAttributes().build());
         event.put(ModEntities.RUBY_EVOKER.get(), RubyEvokerEntity.createAttributes().build());
-        event.put(ModEntities.RUBY_PILLAGER.get(), RubyPillagerEntity.createAttributes().build());
-        event.put(ModEntities.RUBY_PLAYER.get(), RubyPlayerEntity.createAttributes().build());
-        event.put(ModEntities.BUTTERFLY.get(), ButterflyEntity.createAttributes().build());
-        event.put(ModEntities.RUBY_ENDERMAN.get(), RubyEndermanEntity.createAttributes().build());
-    }
-
-    @SubscribeEvent
-    public static void registerSpawnPlacements(SpawnPlacementRegisterEvent event) {
         // 怪物生成规则：在黑暗的地表生成
         event.register(ModEntities.RUBY_GOLEM.get(),
                 SpawnPlacements.Type.ON_GROUND,
@@ -80,14 +72,6 @@ public class ModEvents {
                 Monster::checkMonsterSpawnRules,
                 SpawnPlacementRegisterEvent.Operation.AND);
         // 注意：红宝石玩家是BOSS，只能用刷怪蛋放，不注册自然生成
-
-        // 蝴蝶：像动物一样在地面、明亮处生成
-        event.register(ModEntities.BUTTERFLY.get(),
-                SpawnPlacements.Type.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                Animal::checkAnimalSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND);
-
         event.register(ModEntities.RUBY_ENDERMAN.get(),
                 SpawnPlacements.Type.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
