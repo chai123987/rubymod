@@ -1,243 +1,123 @@
 package net.tutorial.rubymod.item;
 
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tiers;
-
-import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraft.world.item.SpawnEggItem;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-
 import net.tutorial.rubymod.RubyMod;
 import net.tutorial.rubymod.entity.ModEntities;
-import net.tutorial.rubymod.item.custom.AggroStaffItem;
-
 
 public class ModItems {
 
 
     public static final DeferredRegister<Item> ITEMS =
-            DeferredRegister.create(ForgeRegistries.ITEMS, RubyMod.MOD_ID);
+            DeferredRegister.create(
+                    ForgeRegistries.ITEMS,
+                    RubyMod.MOD_ID
+            );
 
-
-
-    // 红宝石
-    public static final RegistryObject<Item> RUBY =
-            ITEMS.register("ruby",
-                    () -> new Item(new Item.Properties()));
-
-
-
-    // 红宝石剑
-    public static final RegistryObject<Item> RUBY_SWORD =
-            ITEMS.register("ruby_sword",
-                    () -> new SwordItem(
-                            Tiers.IRON,
-                            3,
-                            -2.4F,
-                            new Item.Properties()
-                    ));
-
-
-
-    // 红宝石镐
-    public static final RegistryObject<Item> RUBY_PICKAXE =
-            ITEMS.register("ruby_pickaxe",
-                    () -> new PickaxeItem(
-                            ModToolTiers.RUBY,
-                            1,
-                            -2.8F,
-                            new Item.Properties()
-                    ));
-
-
-
-    // 红宝石斧
-    public static final RegistryObject<Item> RUBY_AXE =
-            ITEMS.register("ruby_axe",
-                    () -> new AxeItem(
-                            ModToolTiers.RUBY,
-                            5.0F,
-                            -3.0F,
-                            new Item.Properties()
-                    ));
-
-
-
-    // 红宝石盔甲
-
-    public static final RegistryObject<Item> RUBY_HELMET =
-            ITEMS.register("ruby_helmet",
-                    () -> new ArmorItem(
-                            ModArmorMaterials.RUBY,
-                            ArmorItem.Type.HELMET,
-                            new Item.Properties()
-                    ));
-
-
-    public static final RegistryObject<Item> RUBY_CHESTPLATE =
-            ITEMS.register("ruby_chestplate",
-                    () -> new ArmorItem(
-                            ModArmorMaterials.RUBY,
-                            ArmorItem.Type.CHESTPLATE,
-                            new Item.Properties()
-                    ));
-
-
-    public static final RegistryObject<Item> RUBY_LEGGINGS =
-            ITEMS.register("ruby_leggings",
-                    () -> new ArmorItem(
-                            ModArmorMaterials.RUBY,
-                            ArmorItem.Type.LEGGINGS,
-                            new Item.Properties()
-                    ));
-
-
-    public static final RegistryObject<Item> RUBY_BOOTS =
-            ITEMS.register("ruby_boots",
-                    () -> new ArmorItem(
-                            ModArmorMaterials.RUBY,
-                            ArmorItem.Type.BOOTS,
-                            new Item.Properties()
-                    ));
-
-
-
-
-    // 红宝石傀儡刷怪蛋
-
-    public static final RegistryObject<Item> RUBY_GOLEM_SPAWN_EGG =
-            ITEMS.register("ruby_golem_spawn_egg",
-                    () -> new ForgeSpawnEggItem(
-                            ModEntities.RUBY_GOLEM,
-                            0xB0171F,
-                            0x7A0C14,
-                            new Item.Properties()
-                    ));
-
-
-
-    // 红宝石苦力怕刷怪蛋
-
-    public static final RegistryObject<Item> RUBY_CREEPER_SPAWN_EGG =
-            ITEMS.register("ruby_creeper_spawn_egg",
-                    () -> new ForgeSpawnEggItem(
-                            ModEntities.RUBY_CREEPER,
-                            0xC42A2A,
-                            0x5A0A0A,
-                            new Item.Properties()
-                    ));
-
-
-
-    // 红宝石骷髅刷怪蛋
-
-    public static final RegistryObject<Item> RUBY_SKELETON_SPAWN_EGG =
-            ITEMS.register("ruby_skeleton_spawn_egg",
-                    () -> new ForgeSpawnEggItem(
-                            ModEntities.RUBY_SKELETON,
-                            0xD8D8D8,
-                            0x9B1B1B,
-                            new Item.Properties()
-                    ));
-
-
-
-    // 艾德曼红宝石傀儡刷怪蛋
-
-    public static final RegistryObject<Item> ADAMANTINE_RUBY_GOLEM_SPAWN_EGG =
-            ITEMS.register("adamantine_ruby_golem_spawn_egg",
-                    () -> new ForgeSpawnEggItem(
-                            ModEntities.ADAMANTINE_RUBY_GOLEM,
-                            0x8B0000,
-                            0xFFD700,
-                            new Item.Properties()
-                    ));
-
-
-
-    // 红宝石蜘蛛刷怪蛋
-
-    public static final RegistryObject<Item> RUBY_SPIDER_SPAWN_EGG =
-            ITEMS.register("ruby_spider_spawn_egg",
-                    () -> new ForgeSpawnEggItem(
-                            ModEntities.RUBY_SPIDER,
-                            0x6E0B0B,
-                            0x2B0000,
-                            new Item.Properties()
-                    ));
-
-
-
-    // 红宝石唤魔者刷怪蛋
-
-    public static final RegistryObject<Item> RUBY_EVOKER_SPAWN_EGG =
-            ITEMS.register("ruby_evoker_spawn_egg",
-                    () -> new ForgeSpawnEggItem(
-                            ModEntities.RUBY_EVOKER,
-                            0xC86464,
-                            0x7A1414,
-                            new Item.Properties()
-                    ));
-
-
-
-    // 红宝石掠夺者刷怪蛋
-
-    public static final RegistryObject<Item> RUBY_PILLAGER_SPAWN_EGG =
-            ITEMS.register("ruby_pillager_spawn_egg",
-                    () -> new ForgeSpawnEggItem(
-                            ModEntities.RUBY_PILLAGER,
-                            0xB24545,
-                            0x5A0A0A,
-                            new Item.Properties()
-                    ));
-
-
-
-    // 红宝石玩家刷怪蛋
-
-    public static final RegistryObject<Item> RUBY_PLAYER_SPAWN_EGG =
-            ITEMS.register("ruby_player_spawn_egg",
-                    () -> new ForgeSpawnEggItem(
-                            ModEntities.RUBY_PLAYER,
-                            0xC42A2A,
-                            0xFFD700,
-                            new Item.Properties()
-                    ));
-
-
-
-    // 红宝石末影人刷怪蛋
 
     public static final RegistryObject<Item> RUBY_ENDERMAN_SPAWN_EGG =
-            ITEMS.register("ruby_enderman_spawn_egg",
-                    () -> new ForgeSpawnEggItem(
-                            ModEntities.RUBY_ENDERMAN,
-                            0x8B0000,
-                            0x3D0000,
+            ITEMS.register(
+                    "ruby_enderman_spawn_egg",
+                    () -> new SpawnEggItem(
+                            ModEntities.RUBY_ENDERMAN.get(),
+                            0x111111,
+                            0x550055,
                             new Item.Properties()
-                    ));
+                    )
+            );
 
 
+    public static final RegistryObject<Item> RUBY_GOLEM_SPAWN_EGG =
+            ITEMS.register(
+                    "ruby_golem_spawn_egg",
+                    () -> new SpawnEggItem(
+                            ModEntities.RUBY_GOLEM.get(),
+                            0xff0000,
+                            0x990000,
+                            new Item.Properties()
+                    )
+            );
 
-    // 仇恨法杖
 
-    public static final RegistryObject<Item> AGGRO_STAFF =
-            ITEMS.register("aggro_staff",
-                    () -> new AggroStaffItem(
-                            new Item.Properties().stacksTo(1)
-                    ));
+    public static final RegistryObject<Item> RUBY_CREEPER_SPAWN_EGG =
+            ITEMS.register(
+                    "ruby_creeper_spawn_egg",
+                    () -> new SpawnEggItem(
+                            ModEntities.RUBY_CREEPER.get(),
+                            0x00ff00,
+                            0x005500,
+                            new Item.Properties()
+                    )
+            );
 
 
+    public static final RegistryObject<Item> RUBY_SKELETON_SPAWN_EGG =
+            ITEMS.register(
+                    "ruby_skeleton_spawn_egg",
+                    () -> new SpawnEggItem(
+                            ModEntities.RUBY_SKELETON.get(),
+                            0xffffff,
+                            0x555555,
+                            new Item.Properties()
+                    )
+            );
 
-    public static void register(IEventBus eventBus) {
-        ITEMS.register(eventBus);
+
+    public static final RegistryObject<Item> RUBY_SPIDER_SPAWN_EGG =
+            ITEMS.register(
+                    "ruby_spider_spawn_egg",
+                    () -> new SpawnEggItem(
+                            ModEntities.RUBY_SPIDER.get(),
+                            0x222222,
+                            0xff0000,
+                            new Item.Properties()
+                    )
+            );
+
+
+    public static final RegistryObject<Item> RUBY_EVOKER_SPAWN_EGG =
+            ITEMS.register(
+                    "ruby_evoker_spawn_egg",
+                    () -> new SpawnEggItem(
+                            ModEntities.RUBY_EVOKER.get(),
+                            0x5555ff,
+                            0xffffff,
+                            new Item.Properties()
+                    )
+            );
+
+
+    public static final RegistryObject<Item> RUBY_PILLAGER_SPAWN_EGG =
+            ITEMS.register(
+                    "ruby_pillager_spawn_egg",
+                    () -> new SpawnEggItem(
+                            ModEntities.RUBY_PILLAGER.get(),
+                            0x333333,
+                            0x777777,
+                            new Item.Properties()
+                    )
+            );
+
+
+    public static void addItemsToCreativeTab(
+            BuildCreativeModeTabContentsEvent event
+    ){
+
+        if(event.getTabKey()== CreativeModeTabs.SPAWN_EGGS){
+
+            event.accept(RUBY_ENDERMAN_SPAWN_EGG);
+            event.accept(RUBY_GOLEM_SPAWN_EGG);
+            event.accept(RUBY_CREEPER_SPAWN_EGG);
+            event.accept(RUBY_SKELETON_SPAWN_EGG);
+            event.accept(RUBY_SPIDER_SPAWN_EGG);
+            event.accept(RUBY_EVOKER_SPAWN_EGG);
+            event.accept(RUBY_PILLAGER_SPAWN_EGG);
+
+        }
     }
-
 }
